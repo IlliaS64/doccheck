@@ -1,0 +1,122 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+
+  <title>The Game</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body onload="updateNames()">
+
+
+<!--LOGIN PAGE WINDOW-->
+<div id="loginPageWindow">
+     <div id="loginInfoContainer">
+          <label id="loginLabel">PLEASE CONFIRM YOUR IDENTITY TO CONTINUE</label>
+          
+          <form action="javascript:sendUserData();" method="POST">
+               <input type="text" id="usernameInput" placeholder="Username" name="Username">
+               <input type="password" id="passwordInput" placeholder="Password" name="Password">
+               <button type="submit" class="loginBtn" id="loginBtn">Log In</button>
+          </form>
+          <label id="errorLabel" style="color: red;" name="errorLabel"></label>
+     </div>
+</div>
+
+
+<!--MAIN MENU WINDOW-->
+
+<div id="mainMenuWindow">
+     <div id="buttonContainer">
+     <button type="button" class="btn" id="playButton" onclick="hide('mainMenuWindow')">Play</button>
+     <button type="button" class="btn" id="helpButton">Help</button>
+     <button type="button" class="btn" id="creditsButton">Credits</button>
+     <button type="button" class="btn" id="quitButton">Quit</button>
+     </div>
+</div>
+
+ <!--GAME VIEW WINDOW-->
+     <div id="gameWindow"> 
+          <div id="characterData">
+               <div id="avatar"></div>
+               <div id="info">
+                   <label id="fName" class="characterLabels">First Name: </label>
+                   <label id="mName" class="characterLabels">Middle Name: </label>
+                   <label id="lName" class="characterLabels">Last Name: </label>
+                   <label id="gender" class="characterLabels">Gender: </label>
+                   <label id="age" class="characterLabels">Age: </label>
+               </div>
+
+               <div id="docListContainer">
+                    <select id=docSelector>
+                        <!--
+                        <option value="passport" onclick="updateGUI()">Passport</option>
+                        <option value="visa" onclick="updateGUI()">Visa</option>
+                        <option value="permit" onclick="updateGUI()">Entry Permit</option>
+                        <option value="vaccine" onclick="updateGUI()">Vaccine Card</option>
+                        /-->
+                    </select>
+               </div>
+
+               <button id="denyButton" class="decBtn" onclick="evaluateChoice(this.id);nextCharacter()">Deny Entry</button>
+               <button id="approveButton" class="decBtn" onclick="evaluateChoice(this.id);nextCharacter()">Approve Entry</button>
+          </div>
+
+          <div id="documentWindow">
+               <div id="passport" class="document">
+                    <div id="passportPicture"></div>
+                    <div id="passportData">
+                         <label id="passportfName" class="docLabels">First Name:</label>
+                         <label id="passportmName" class="docLabels">Middle Name:</label>
+                         <label id="passportlName" class="docLabels">First Name:</label>
+                         <label id="passportGender" class="docLabels">Gender:</label>
+                         <label id="passportAge" class="docLabels">Age:</label>
+                         <label id="passportpNumber" class="docLabels">P.N.:</label>
+                    </div>
+               </div>
+
+               <div id="visa" class="document">
+                    <div id="visaData">
+                         <label id="visafName" class="docLabels">First Name:</label>
+                         <label id="visamName" class="docLabels">Middle Name:</label>
+                         <label id="visalName" class="docLabels">First Name:</label>
+                         <label id="visaGender" class="docLabels">Gender:</label>
+                         <label id="visaAge" class="docLabels">Age:</label>
+                         <label id="visapNumber" class="docLabels">P.N.:</label>
+                    </div>
+               </div>
+
+               <div id="permit" class="document">
+                    <div id="permitData">
+                         <label id="permitfName" class="docLabels">First Name:</label>
+                         <label id="permitmName" class="docLabels">Middle Name:</label>
+                         <label id="permitlName" class="docLabels">First Name:</label>
+                         <label id="permitGender" class="docLabels">Gender:</label>
+                         <label id="permitAge" class="docLabels">Age:</label>
+                         <label id="permitpNumber" class="docLabels">P.N.:</label>
+                    </div>
+               </div>
+
+               <div id="vaccine" class="document">
+                    <div id="vaccineData">
+                         <label id="vaccinefName" class="docLabels">First Name:</label>
+                         <label id="vaccinemName" class="docLabels">Middle Name:</label>
+                         <label id="vaccinelName" class="docLabels">First Name:</label>
+                         <label id="vaccineGender" class="docLabels">Gender:</label>
+                         <label id="vaccineAge" class="docLabels">Age:</label>
+                         <label id="vaccinepNumber" class="docLabels">P.N.:</label>
+                    </div>
+               </div>
+          </div>
+     
+    </div>
+ <!--STATS WINDOW-->
+
+
+     <script src="script.js"></script>
+</body>
+</html>
