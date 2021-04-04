@@ -63,7 +63,7 @@ app.post('/adduserprofile', (req, res) =>{
 app.post('/updatenames', (req, res) => {
     var type = req.body.type;
 
-    fs.readFile('./characters/names/' + type +  'Names.txt', function(err, data) {
+    fs.readFile('./Characters/Names/' + type +  'Names.txt', function(err, data) {
         if(err) throw err;
         var names = data.toString().split("\n");
         res.json(names);
