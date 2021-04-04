@@ -54,11 +54,11 @@ function newCharacter(){
 
   if(gender){
     genderLetter = 'M';
-    picture = new Image(150, 200);
-    picture.src = './'
+    picture = '/Characters/Faces/male/male_' + (randInt(0, 10) + 1);
     fisrtName = maleNames[randInt(0, maleNames.length)];
   } else {
     genderLetter = 'F';
+    picture = '/Characters/Faces/female/female_' + (randInt(0, 10) + 1);
     fisrtName = femaleNames[randInt(0, femaleNames.length)];
   }
   middleName = letters.charAt(randInt(0, letters.length));
@@ -140,6 +140,7 @@ function fillDocument(document, type){
   getElement(document + 'Gender').innerHTML = 'Gender: ' + currentCharacter.gender;
   getElement(document + 'Age').innerHTML = 'Age: ' + currentCharacter.age;
   getElement(document + 'pNumber').innerHTML = 'P.N.: ' + currentCharacter.passportNumber;
+  getElement(document + 'Picture').style.backgroundImage = 'url(' + currentCharacter.picture + '.png)';
 }
 
 function updateAll(){
@@ -168,6 +169,7 @@ function nextCharacter(){
   getElement('lName').innerHTML = 'Last Name: ' + currentCharacter.lName;
   getElement('gender').innerHTML = 'Gender: ' + currentCharacter.gender;
   getElement('age').innerHTML = 'Age: ' + currentCharacter.age;
+  getElement('avatar').style.backgroundImage = 'url(' + currentCharacter.picture + '.png)';
 
   if(!currentCharacter.valid){
     spoilDoc();
@@ -193,7 +195,6 @@ function spoilDoc(){
   var toBeReplaced = getElement(spoiledDoc.docType + spoiledValueKey.replace('doc', '')).innerHTML;
   var replacingWith = spoilValue(spoiledValue);
   getElement(spoiledDoc.docType + spoiledValueKey.replace('doc', '')).innerHTML = toBeReplaced.replace(spoiledValue, replacingWith);
-  alert('Spoiled!');
 }
 
 function spoilValue(value){

@@ -80,6 +80,19 @@ body{
     margin-bottom: 5px;
 }
 
+#avatar{
+    position: absolute;
+    width: 150px;
+    height: 200px;
+    background-color: white;
+    display:inline-block;
+    margin: 30px;
+    background: url(/Characters/Faces/female/female_1.png) no-repeat center center;
+    background-size: cover;
+    background-position: center;
+
+}
+
 
 #characterData{
     border: 10px #424756 solid;
@@ -98,14 +111,6 @@ body{
     background-color: #2f3541;
 }
 
-#avatar{
-    position: absolute;
-    width: 150px;
-    height: 200px;
-    background-color: white;
-    display:inline-block;
-    margin: 30px;
-}
 
 #info{
     position: absolute;
@@ -151,6 +156,8 @@ body{
     width: 150px;
     height: 200px;
     background-color: white;
+    background-size: cover;
+    background-position: center;
 }
 
 #passportData{
