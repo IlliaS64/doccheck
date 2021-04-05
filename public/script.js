@@ -334,10 +334,10 @@ function updateSaveLabel(hoverButtonId){
 }
 
 function loadSave(buttonId){
-  var day = currentProfile.progress["progressDay_" + buttonId.split('').pop()];
-  var balance = currentProfile.progress["progressBalance_" + buttonId.split('').pop()];
-
-  currentSave = {day: day, balance: balance};
+  var saveNumber = buttonId.split('').pop()
+  var day = currentProfile.progress["progressDay_" + saveNumber];
+  var balance = currentProfile.progress["progressBalance_" + saveNumber];
+  currentSave = {saveNumber: saveNumber, day: day, balance: balance};
 
   hide('loginPageWindow');
   hide('saveContainer');
@@ -383,13 +383,29 @@ function updateStats(){
 }
 
 function endDay(){
-  uploadProfile();
   hide('gameWindow');
   currentCharacter = null;
   updateStats();
+  uploadProfile();
   show('statsWindow');
 }
 
 async function uploadProfile(){
-  //TBD
+  const username = currentProfile.userName;
+  const sendingData = { number: currentSave.saveNumber, username: username, day: currentSave.day, balance: currentSave.balance};
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+
+    },
+    body: JSON.stringify(sendingData)
+    
+  };
+    
+  const res = await fetch('/updateProfile', options);
+  const receivedData = await res.json();
+  currentProfile = receivedData;
+
+
 }
