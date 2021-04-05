@@ -1,13 +1,16 @@
+const { get } = require("node:https");
+
 const reader = new FileReader();
 const documentList = ['passport', 'visa', 'permit', 'vaccine'];
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const numbers = '0123456789';
 const docLength = documentList.length;
 var maleNames = ['Bob', 'Mike', 'John'];
 var femaleNames = ['Alice', 'Abby', 'Ellie'];
 var lastNames = ['White', 'Johnson', 'Fletcher'];
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const numbers = '0123456789';
 var currentCharacter;
 var currentProfile;
+var currentSave;
 
 function hide(element) {
   getElement(element).style.display = 'none';
@@ -224,7 +227,37 @@ function spoilValue(value){
   }
 }
 
-async function sendUserData(){
+async function addProfile(){
+  const username = getElement('usernameInput').value;
+  const password = getElement('passwordInput').value;
+  if(username.indexOf(' ') >= 0 || password.indexOf(' ') >= 0){
+    getElement('errorLabel').innerHTML = 'Username or Password cannot contain spaces. Try again!';
+  }else if(username == '' || password == '' ){
+    getElement('errorLabel').innerHTML = 'Username or Password cannot be blank. Try again!';
+  }else{
+    const sendingData = { username, password }
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+
+      },
+      body: JSON.stringify(sendingData)
+      
+    };
+    const res = await fetch('/addnewprofile', options);
+    const receivedData = await res.json();
+    if(receivedData.exists){
+      getElement('errorLabel').innerHTML = 'Username taken. Please sign in using password or create a new account.';
+      getElement('successLabel').innerHTML = '';
+    }else{
+      getElement('errorLabel').innerHTML = '';
+      getElement('successLabel').innerHTML = 'Account successfully created. You can now log in.'
+    }
+  }
+}
+
+async function loginUser(){
   const username = getElement('usernameInput').value;
   const password = getElement('passwordInput').value;
 
@@ -246,7 +279,16 @@ async function sendUserData(){
     };
     const res = await fetch('/loginuser', options);
     const receivedData = await res.json();
-    currentProfile = receivedData;
+    
+    if(receivedData == null){
+      getElement('errorLabel').innerHTML = 'Credentials do not match. Try again or create a new profile.';
+    }else{
+      currentProfile = receivedData;
+      getElement('loggedInAs').innerHTML += currentProfile.userName;
+      hide('loginPageWindow');
+      show('mainMenuWindow');
+    }
+
   }
 }
 
@@ -278,4 +320,25 @@ async function updateNames(){
   femaleNames = getNames('female');  
   maleNames = getNames('male');
   lastNames = getNames('last')
+}
+
+function updateSaveLabel(hoverButtonId){
+  var day = currentProfile.progress["progressDay_" + hoverButtonId.split('').pop()];
+  var balance = currentProfile.progress["progressBalance_" + hoverButtonId.split('').pop()];
+
+  getElement('saveInfoLabel').innerHTML = 'Day: ' + day + " Balance: " + balance;
+}
+
+function loadSave(buttonId){
+  var day = currentProfile.progress["progressDay_" + buttonId.split('').pop()];
+  var balance = currentProfile.progress["progressBalance_" + buttonId.split('').pop()];
+
+  currentSave = {day: day, balance: balance};
+}
+
+
+function logOut(){
+  //TBD
+  currentSave = null;
+  currentProfile = null;
 }

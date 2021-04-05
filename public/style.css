@@ -35,7 +35,7 @@ input{
     background-color: #424756;
 }
 
-input:focus{
+input:hover{
     outline: none;
     border-color: orange;
 }
@@ -50,7 +50,7 @@ input:focus{
     
 }
 
-.loginBtn:active{
+.loginBtn:hover{
     border-color: orange;
 }
 
@@ -71,13 +71,31 @@ body{
     margin-top: 15%;
 }
 
+#saveContainer{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 19.55%;
+    display: none;
+}
+
 .btn{
-    background-color: #e1d798;
-    border: 0px;
     width: 200px;
     height: 50px;
     border-radius: 5px;
     margin-bottom: 5px;
+    border: 2px solid black;
+    border-radius: 25px;
+    background-color: #424756;
+    font-size: 20px;
+}
+
+.btn:hover{
+    border-color: orange;
 }
 
 #avatar{

@@ -40,24 +40,41 @@ app.post('/loginuser', (req, res) =>{
     
 });
 
-app.post('/adduserprofile', (req, res) =>{
+app.post('/addnewprofile', (req, res) =>{
     var username = req.body.username;
     var password = req.body.password;
     console.log(req.body);
-    const newProfile = new Profile({
-        userName: username,
-        userPassword: password,
-        progressDay: 0,
-        progressBalance: 200
-    })
 
-    newProfile.save()
+    Profile.findOne({userName: username})
         .then((result) => {
-            res.send(result);
+            if(result != null){
+                res.json({exists: true});
+            }else{
+                const newProfile = new Profile({
+                    userName: username,
+                    userPassword: password,
+                    progress:{
+                        progressDay_1: 0,
+                        progressBalance_1: 0,
+                        progressDay_2: 0,
+                        progressBalance_2: 0,
+                        progressDay_3: 0,
+                        progressBalance_3: 0
+                    }
+                });
+            
+                newProfile.save()
+                    .then((result) => {
+                        res.send(result);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
         })
         .catch((err) => {
             console.log(err);
-        })
+        });
 });
 
 app.post('/updatenames', (req, res) => {
@@ -70,3 +87,6 @@ app.post('/updatenames', (req, res) => {
     });
 });
 
+function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
