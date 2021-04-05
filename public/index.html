@@ -39,11 +39,11 @@
           <button type="button" class="btn" id="playButton" onclick="hide('buttonContainer');show('saveContainer')">Play</button>
           <button type="button" class="btn" id="helpButton">Help</button>
           <button type="button" class="btn" id="creditsButton">Credits</button>
-          <button type="button" class="btn" id="quitButton">Quit</button>
+          <button type="button" class="btn" id="quitButton" onclick="logOut()">Quit</button>
      </div>
 
      <div id="saveContainer">
-          <p id="saveInfoLabel">Day: 20 Balance: 300</p>
+          <p id="saveInfoLabel"></p>
           <button type="button" class="btn" id="save_1" onmouseover="updateSaveLabel(this.id)" onclick="loadSave(this.id)">Save 1</button>
           <button type="button" class="btn" id="save_2" onmouseover="updateSaveLabel(this.id)" onclick="loadSave(this.id)">Save 2</button>
           <button type="button" class="btn" id="save_3" onmouseover="updateSaveLabel(this.id)" onclick="loadSave(this.id)">Save 3</button>
@@ -53,7 +53,16 @@
 
 <!--STATS WINDOW-->
 <div id="statsWindow">
-     <div id=""> </div>
+     <div id="statsContainer">
+          <label id="currentDay" class="statsLabel">Day 0</label>
+          <label id="gainedMoney" class="statsLabel">Earned today: </label>
+          <label id="lostMoney" class="statsLabel">Deductions: </label>
+          <label id="unpredictMoney" class="statsLabel">Unpredicted earnings/losses: </label>
+          <label id="totalMoney" class="statsLabel">Total today: </label>
+          <label id="balanceMoney" class="statsLabel">Balance: </label>
+          <button type="button" id="nextDayBtn" onclick="nextDay()"> Next Day </button>
+          <button type="button" id="backToMenuBtn" onclick="hide('statsWindow'); show('mainMenuWindow'); show('buttonContainer')"> Back to Menu </button>
+     </div>
 </div>
 
 <!--GAME VIEW WINDOW-->

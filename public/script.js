@@ -1,5 +1,4 @@
-const { get } = require("node:https");
-
+//const { get } = require("node:https");
 const reader = new FileReader();
 const documentList = ['passport', 'visa', 'permit', 'vaccine'];
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -8,9 +7,14 @@ const docLength = documentList.length;
 var maleNames = ['Bob', 'Mike', 'John'];
 var femaleNames = ['Alice', 'Abby', 'Ellie'];
 var lastNames = ['White', 'Johnson', 'Fletcher'];
+
 var currentCharacter;
 var currentProfile;
 var currentSave;
+
+var todayEarnings;
+var todayLosses;
+var randomMoney;
 
 function hide(element) {
   getElement(element).style.display = 'none';
@@ -284,7 +288,7 @@ async function loginUser(){
       getElement('errorLabel').innerHTML = 'Credentials do not match. Try again or create a new profile.';
     }else{
       currentProfile = receivedData;
-      getElement('loggedInAs').innerHTML += currentProfile.userName;
+      getElement('loggedInAs').innerHTML = 'Logged in as: ' + currentProfile.userName;
       hide('loginPageWindow');
       show('mainMenuWindow');
     }
@@ -334,6 +338,12 @@ function loadSave(buttonId){
   var balance = currentProfile.progress["progressBalance_" + buttonId.split('').pop()];
 
   currentSave = {day: day, balance: balance};
+
+  hide('loginPageWindow');
+  hide('saveContainer');
+  show('statsWindow');
+  resetStats();
+  updateStats();
 }
 
 
@@ -341,4 +351,45 @@ function logOut(){
   //TBD
   currentSave = null;
   currentProfile = null;
+  hide('mainMenuWindow');
+  show('loginPageWindow');
+}
+
+function nextDay(){
+  resetStats();
+  currentSave.day++;
+  hide('statsWindow');
+  show('gameWindow');
+  nextCharacter();
+}
+
+function resetStats(){
+  todayEarnings = 0;
+  todayLosses = 0;
+  todayTotal = 0;
+  randomMoney = 0;
+}
+
+function updateStats(){
+  var todayTotal = todayEarnings + todayLosses + randomMoney;
+  currentSave.balance += todayTotal;
+  
+  getElement('currentDay').innerHTML = 'Day ' + currentSave.day;
+  getElement('gainedMoney').innerHTML = 'Earned today: ' + todayEarnings;
+  getElement('lostMoney').innerHTML = 'Deductions: ' + todayLosses;
+  getElement('unpredictMoney').innerHTML = 'Unpredicted earnings/losses: ' + randomMoney;
+  getElement('totalMoney').innerHTML = 'Total today: ' + todayTotal;
+  getElement('balanceMoney').innerHTML = 'Balance: ' + currentSave.balance;
+}
+
+function endDay(){
+  uploadProfile();
+  hide('gameWindow');
+  currentCharacter = null;
+  updateStats();
+  show('statsWindow');
+}
+
+async function uploadProfile(){
+  //TBD
 }

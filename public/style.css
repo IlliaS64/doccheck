@@ -257,4 +257,73 @@ body{
 #mainMenuWindow{
     display: none;
 }
+#loginPageWindow{
+
+}
+#statsWindow{
+    display: none;
+}
+
+#statsContainer{
+    width: auto;
+    height: auto;
+    position: relative;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 10%;
+    padding: 10px;
+}
+
+.statsLabel{
+    position: relative;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
+
+#nextDayBtn{
+    width: 200px;
+    height: 40px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    background-color: #424756;
+    border: 2px solid black;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 2%;
+}
+
+#nextDayBtn:hover{
+    border-color: orange;
+}
+
+#backToMenuBtn{
+    width: 200px;
+    height: 40px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    background-color: #424756;
+    border: 2px solid black;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 7%;
+}
+
+#backToMenuBtn:hover{
+    border-color: orange;
+}
+
+#currentDay{
+    font-size: 36px;
+    margin-top: -5%;
+    margin-bottom: 7%;
+}
 
