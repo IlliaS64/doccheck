@@ -88,7 +88,6 @@ app.post('/updatenames', (req, res) => {
 });
 
 app.post('/updateProfile', (req, res) => {
-    console.log(req.body);
     const saveNumber = req.body.number;
     const userName = req.body.username;
     var update;

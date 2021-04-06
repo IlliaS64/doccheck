@@ -98,6 +98,12 @@ body{
     border-color: orange;
 }
 
+#timeLine{
+    background-color: green;
+    width: 100%;
+    height: 20px;
+}
+
 #avatar{
     position: absolute;
     width: 150px;
@@ -108,7 +114,8 @@ body{
     background: url(/Characters/Faces/female/female_1.png) no-repeat center center;
     background-size: cover;
     background-position: center;
-
+    border: 3px solid black;
+    border-radius: 10px;
 }
 
 
@@ -117,11 +124,11 @@ body{
     position: absolute;
     width: 49%;
     height: 74%;
-    background-color: #2f3541;
+    background-color: ;
 }
 
 #documentWindow{
-    border: 10px #424756 solid;
+    margin: 10px;
     margin-left: 49%;
     position: absolute;
     width: 49%;
@@ -135,20 +142,29 @@ body{
     width: 470px;
     height: 200px;
     margin-bottom: px;
-    background-color: white;
     margin: 30px;
     margin-left: 200px;
+    border: 3px solid black;
+    border-radius: 10px;
 }
 
 #docListContainer{
     position: absolute;
-    width: 640px;
+    width: 645px;
     height: 270px;
     margin-bottom: 30px;
-    background-color: white;
     margin-left: 30px;
     margin-top: 250px;
     
+}
+
+
+#docSelector{
+    width: 100%;
+    height: 100%;
+    border: 3px solid black;
+    border-radius: 10px;
+    background-color: transparent;
 }
 
 .characterLabels{
@@ -167,33 +183,37 @@ body{
     margin: auto;
     margin-top: 25%;
     display: none;
+    border: 3px solid black;
+    border-radius: 10px;
 }
 
 #passportPicture{
     display: inline-block;
     width: 150px;
     height: 200px;
-    background-color: white;
     background-size: cover;
     background-position: center;
+    border: 3px solid black;
+    border-radius: 10px;
 }
 
 #passportData{
     display: inline-block;
     position: absolute;
-    background-color: white;
-    margin-left: 10px;
+    margin-left: 30px;
     width: 48%;
     height: 43%;
+    text-decoration: underline;
 }
 
-#permit{
-    width: 500px;
+#visaPicture{
+    display: inline-block;
+    width: 150px;
     height: 200px;
-    background-color: wheat;
-    margin: auto;
-    margin-top: 30%;
-    display: none;
+    background-size: cover;
+    background-position: center;
+    border: 3px solid black;
+    border-radius: 10px;
 }
 
 #visa{
@@ -203,6 +223,29 @@ body{
     margin: auto;
     margin-top: 15%;
     display: none;
+    border: 3px solid black;
+    border-radius: 10px;
+    
+}
+
+#visaData{
+    margin-top: 30px;
+    text-decoration: underline;
+}
+
+#permit{
+    width: 500px;
+    height: 200px;
+    background-color: wheat;
+    margin: auto;
+    margin-top: 30%;
+    display: none;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+#permitData{
+    text-decoration: underline;
 }
 
 #vaccine{
@@ -212,6 +255,12 @@ body{
     margin: auto;
     margin-top: 15%;
     display: none;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+#vaccineData{
+    text-decoration: underline;
 }
 
 .docLabels{
@@ -219,35 +268,34 @@ body{
     margin: 10px;
 }
 
-#docSelector{
-    width: 100%;
-    height: 100%;
-}
-
 .decBtn{
     position: relative;
     width: 250px;
-    height: 100px;
-    border: 0px;
-    border-radius: 10px;
-    margin-top: 560px;
+    height: 80px;
+    border: 3px solid black;
+    border-radius: 30px;
+    margin-top: 83%;
     margin-left: 60px;
+    background-color: #424756;
 }
 
 
-.decBtn:active{
-    width: 200px;
-    height: 70px;
-    margin-left: 85px;
-}
-
-#approveButton{
-    background-color: green;
+#approveButton:hover{
+    border-color: green;
     
 }
 
-#denyButton{
-    background-color: red;
+#approveButton:active{
+    color: green;
+    
+}
+
+#denyButton:hover{
+    border-color: red;
+}
+
+#denyButton:active{
+    color: red;
 }
 
 #gameWindow{

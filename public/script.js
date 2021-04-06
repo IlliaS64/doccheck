@@ -12,8 +12,8 @@ var currentCharacter;
 var currentProfile;
 var currentSave;
 
-var todayEarnings;
-var todayLosses;
+var fails;
+var rights;
 var randomMoney;
 
 function hide(element) {
@@ -162,8 +162,10 @@ function evaluateChoice(buttonId){
 
   if(currentCharacter.valid == buttonPressed){
     alert('Right!');
+    rights++;
   }else{
     alert('Wrong');
+    fails++;
   }
 }
 
@@ -356,6 +358,7 @@ function logOut(){
 }
 
 function nextDay(){
+  startTimer();
   resetStats();
   currentSave.day++;
   hide('statsWindow');
@@ -364,13 +367,25 @@ function nextDay(){
 }
 
 function resetStats(){
-  todayEarnings = 0;
-  todayLosses = 0;
-  todayTotal = 0;
+  rights = 0;
+  fails = 0;
   randomMoney = 0;
 }
 
 function updateStats(){
+  var todayEarnings;
+  var todayLosses;
+  
+  todayEarnings = rights * 20;
+
+  if(fails <= 2){
+    todayLosses = 0;
+  }else{
+    todayLosses = (fails) * -10;
+  }
+
+
+
   var todayTotal = todayEarnings + todayLosses + randomMoney;
   currentSave.balance += todayTotal;
   
@@ -408,4 +423,19 @@ async function uploadProfile(){
   currentProfile = receivedData;
 
 
+}
+
+function startTimer(){
+  const defaultTime = 300;
+  var timeLeft = defaultTime;
+  
+  var timer = setInterval(function(){
+    
+    timeLeft-=0.1;
+    getElement('timeLine').style.width = timeLeft/defaultTime*100 + '%';
+    if(timeLeft <= 0.01){
+      clearInterval(timer);
+      endDay();
+    }
+  }, 100);
 }
