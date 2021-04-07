@@ -40,6 +40,11 @@ input:hover{
     border-color: orange;
 }
 
+input:focus{
+    outline: none;
+    border-color: orange;
+}
+
 .loginBtn{
     width: 45.5%;
     margin: 10px auto;
@@ -124,7 +129,6 @@ body{
     position: absolute;
     width: 49%;
     height: 74%;
-    background-color: ;
 }
 
 #documentWindow{
@@ -373,3 +377,22 @@ body{
     margin-bottom: 7%;
 }
 
+#decisionLabel{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    margin-top: 77%;
+    text-align: center;
+}
+
+#nextCharacter{
+    position: absolute;
+    left:0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 18%;
+    display: none;
+}

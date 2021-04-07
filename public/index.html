@@ -86,10 +86,13 @@
                     <option value="vaccine" onclick="updateGUI()">Vaccine Card</option>
                     /-->
                </select>
+               <button id="nextCharacter" class="btn" onclick="nextCharacter()">Next</button>
           </div>
 
-          <button id="denyButton" class="decBtn" onclick="evaluateChoice(this.id);nextCharacter()">Deny Entry</button>
-          <button id="approveButton" class="decBtn" onclick="evaluateChoice(this.id);nextCharacter()">Approve Entry</button>
+          <label id="decisionLabel">Decision here</label>
+
+          <button id="denyButton" class="decBtn" onclick="evaluateChoice(this.id)">Deny Entry</button>
+          <button id="approveButton" class="decBtn" onclick="evaluateChoice(this.id)">Approve Entry</button>
      </div>
 
      <div id="documentWindow">

@@ -8,6 +8,9 @@ var maleNames = ['Bob', 'Mike', 'John'];
 var femaleNames = ['Alice', 'Abby', 'Ellie'];
 var lastNames = ['White', 'Johnson', 'Fletcher'];
 
+var wrongDoc = null;
+var currentChoice;
+
 var currentCharacter;
 var currentProfile;
 var currentSave;
@@ -44,7 +47,9 @@ function updateGUI(){
 
 function showDoc(docType){
   hideAll(documentList);
-  show(docType);
+  if(getElement('docSelector').selectedIndex >= 0){
+    show(docType);
+  }
 }
 
 function newCharacter(){
@@ -159,13 +164,47 @@ function updateAll(){
 
 function evaluateChoice(buttonId){
   var buttonPressed = buttonId == 'approveButton'
-
   if(currentCharacter.valid == buttonPressed){
-    alert('Right!');
+    updateDecLabel(true);
     rights++;
   }else{
-    alert('Wrong');
+    updateDecLabel(false);
     fails++;
+  }
+  hide('docSelector');
+  show('nextCharacter');
+}
+
+function updateDecLabel(choice){
+  if(choice){
+    getElement('decisionLabel').innerHTML = 'Right! +$20';
+    getElement('decisionLabel').style.color = 'green';
+  }else{
+    if(currentCharacter.valid){
+      if(fails == 0){
+        getElement('decisionLabel').innerHTML = 'Wrong! The Person was safe! First Warning!';
+        getElement('decisionLabel').style.color = 'red';
+      }else if(fails == 1){
+        getElement('decisionLabel').innerHTML = 'Wrong! The Person was safe! Last Warning!';
+        getElement('decisionLabel').style.color = 'red';
+      }else{
+        getElement('decisionLabel').innerHTML = 'Wrong! The Person was safe! You got fined $10!';
+        getElement('decisionLabel').style.color = 'red';
+      }
+      
+    }else{
+      if(fails == 0){
+        getElement('decisionLabel').innerHTML = wrongDoc + ' was invalid! First Warning!';
+        getElement('decisionLabel').style.color = 'red';
+      }else if(fails == 1){
+        getElement('decisionLabel').innerHTML = wrongDoc + ' was invalid! Last Warning!';
+        getElement('decisionLabel').style.color = 'red';
+      }else{
+        getElement('decisionLabel').innerHTML = wrongDoc + ' was invalid! You got fined $10!';
+        getElement('decisionLabel').style.color = 'red';
+      }
+    }
+    
   }
 }
 
@@ -173,6 +212,7 @@ function nextCharacter(){
   newCharacter();
   fillDocPacket();
   updateAll();
+  wrongDoc = null;
   getElement('fName').innerHTML = 'First Name: ' + currentCharacter.fName;
   getElement('mName').innerHTML = 'Middle Name: ' + currentCharacter.mName;
   getElement('lName').innerHTML = 'Last Name: ' + currentCharacter.lName;
@@ -181,10 +221,14 @@ function nextCharacter(){
   getElement('avatar').style.backgroundImage = 'url(' + currentCharacter.picture + '.png)';
 
   if(!currentCharacter.valid){
-    spoilDoc();
+    wrongDoc = spoilDoc();
+    wrongDoc[0] = wrongDoc[0].toUpperCase();
   }
 
   getElement('docSelector').selectedIndex = -1;
+  show('docSelector');
+  hide('nextCharacter');
+  getElement('decisionLabel').innerHTML = '';
   updateGUI();
 }
 
@@ -204,6 +248,7 @@ function spoilDoc(){
   var toBeReplaced = getElement(spoiledDoc.docType + spoiledValueKey.replace('doc', '')).innerHTML;
   var replacingWith = spoilValue(spoiledValue);
   getElement(spoiledDoc.docType + spoiledValueKey.replace('doc', '')).innerHTML = toBeReplaced.replace(spoiledValue, replacingWith);
+  return spoiledDoc.docType;
 }
 
 function spoilValue(value){
@@ -332,7 +377,7 @@ function updateSaveLabel(hoverButtonId){
   var day = currentProfile.progress["progressDay_" + hoverButtonId.split('').pop()];
   var balance = currentProfile.progress["progressBalance_" + hoverButtonId.split('').pop()];
 
-  getElement('saveInfoLabel').innerHTML = 'Day: ' + day + " Balance: " + balance;
+  getElement('saveInfoLabel').innerHTML = 'Day: ' + day + "<br/>" + "Balance: " + balance;
 }
 
 function loadSave(buttonId){
@@ -426,7 +471,7 @@ async function uploadProfile(){
 }
 
 function startTimer(){
-  const defaultTime = 300;
+  const defaultTime = 120;
   var timeLeft = defaultTime;
   
   var timer = setInterval(function(){
@@ -438,4 +483,25 @@ function startTimer(){
       endDay();
     }
   }, 100);
+
+}
+
+function newRandomEvent(){
+  const happened = Math.random() > .90;
+  const positive = Math.random() > .50;
+  const goodPhrases = [];
+  const badPhrases = [];
+  var change;
+  if(happened){
+    if(positive){
+      change = randInt(10, 500);
+    }else{
+      change = -randInt(10, 500);
+    }
+
+  }
+  
+
+
+
 }
