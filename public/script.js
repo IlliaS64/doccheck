@@ -501,7 +501,4 @@ function newRandomEvent(){
 
   }
   
-
-
-
 }
