@@ -195,13 +195,13 @@ function updateDecLabel(choice){
       
     }else{
       if(fails == 0){
-        getElement('decisionLabel').innerHTML = wrongDoc + ' was invalid! First Warning!';
+        getElement('decisionLabel').innerHTML = capsFirst(wrongDoc) + ' was invalid! First Warning!';
         getElement('decisionLabel').style.color = 'red';
       }else if(fails == 1){
-        getElement('decisionLabel').innerHTML = wrongDoc + ' was invalid! Last Warning!';
+        getElement('decisionLabel').innerHTML = capsFirst(wrongDoc) + ' was invalid! Last Warning!';
         getElement('decisionLabel').style.color = 'red';
       }else{
-        getElement('decisionLabel').innerHTML = wrongDoc + ' was invalid! You got fined $10!';
+        getElement('decisionLabel').innerHTML = capsFirst(wrongDoc) + ' was invalid! You got fined $10!';
         getElement('decisionLabel').style.color = 'red';
       }
     }
@@ -534,4 +534,8 @@ function newRandomEvent(){
 
 function offerLoan(){
   //TBD
+}
+
+function capsFirst(text){
+  return text.charAt(0).toUpperCase() + text.slice(1);
 }

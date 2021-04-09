@@ -4,7 +4,7 @@
 <head>
      <meta charset="utf-8">
 
-  <title>The Border</title>
+  <title>YABS</title>
 
   <link rel="stylesheet" href="style.css">
 
@@ -15,9 +15,14 @@
 
 <!--LOGIN PAGE WINDOW-->
 <div id="loginPageWindow">
+     <div id="titleContainer">
+          <label id="titleLabel">YABS</label>
+          <label id="titleWords">Yet Another Border Simulator</label>
+     </div>
+     
      <div id="loginInfoContainer">
-          <label id="loginLabel">PLEASE CONFIRM YOUR IDENTITY TO CONTINUE</label>
-          
+          <label id="loginLabel">PLEASE LOG IN TO CONTINUE</label>
+     
           <form action="javascript:loginUser();" method="POST">
                <input type="text" id="usernameInput" placeholder="Username" name="Username">
                <input type="password" id="passwordInput" placeholder="Password" name="Password">
@@ -30,6 +35,27 @@
      </div>
 </div>
 
+<!--HELP WINDOW-->
+<div id="helpWindow">
+     <p id="helpInfo">
+          Welcome to YABS!<br>
+          You were selected to maintain peace in your country and check all the immigrants who are trying to cross the border.<br>
+          Make sure you do your job well:<br>
+     </p>
+     <ol>
+          <li>Check all documents for validity</li>
+          <li>Reject everyone who has invalid documents</li>
+          <li>Everyone who has valid documents are allowed </li>
+          <li>Watch the timer. You have to be quick</li>
+          <li>For every correct decision you'll get $20</li>
+          <li>You are only allowed two mistakes. Otherwise $10 will be lost</li>
+          <li>Watch your balance. Don't fall in dept.</li>
+          <li>Random events that will affect your life may happen</li>
+     </ol>
+
+    <button id="backToMenu" class="btn" onclick="hide('helpWindow');show('mainMenuWindow')">Back</button>
+     
+</div>
 
 <!--MAIN MENU WINDOW-->
 
@@ -37,7 +63,7 @@
      <div id="buttonContainer">
           <p id="loggedInAs">Logged in as: </p>
           <button type="button" class="btn" id="playButton" onclick="hide('buttonContainer');show('saveContainer')">Play</button>
-          <button type="button" class="btn" id="helpButton">Help</button>
+          <button type="button" class="btn" id="helpButton" onclick="hide('mainMenuWindow');show('helpWindow')">Help</button>
           <button type="button" class="btn" id="creditsButton">Credits</button>
           <button type="button" class="btn" id="quitButton" onclick="logOut()">Quit</button>
      </div>
@@ -58,7 +84,7 @@
           <label id="eventText">Text</label>
           <label id="eventChange">Change</label>
      </div>
-     
+
      <div id="statsContainer">
           <label id="currentDay" class="statsLabel">Day 0</label>
           <label id="gainedMoney" class="statsLabel">Earned today: </label>
@@ -136,6 +162,7 @@
                     <label id="permitGender" class="docLabels">Gender:</label>
                     <label id="permitAge" class="docLabels">Age:</label>
                     <label id="permitpNumber" class="docLabels">P.N.:</label>
+                    <div id="permitSeal"></div>
                </div>
           </div>
 

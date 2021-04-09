@@ -4,6 +4,23 @@
     font-weight: bold;
 }
 
+#helpWindow{
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    line-height: 40px;
+    display: none;
+}
+
+#titleLabel{
+    font-size: 56px;
+    letter-spacing: 20px;
+    margin-left: 40px;
+}
+
+
 #loginLabel{
     font-size: 24px;
     display: inline-block;
@@ -20,7 +37,7 @@
     right:0;
     margin-left:auto;
     margin-right:auto;
-    margin-top: 10%;
+    margin-top: 8%;
     padding: 10px;
 }
 
@@ -121,7 +138,7 @@ body{
     background-color: white;
     display:inline-block;
     margin: 30px;
-    background: url(/Characters/Faces/female/female_1.png) no-repeat center center;
+    background: url(/Characters/Faces/female/female_1.png) no-repeat center;
     background-size: cover;
     background-position: center;
     border: 3px solid black;
@@ -234,7 +251,7 @@ body{
     height: 500px;
     background-color: lightpink;
     margin: auto;
-    margin-top: 15%;
+    margin-top: 7%;
     display: none;
     border: 3px solid black;
     border-radius: 10px;
@@ -259,6 +276,20 @@ body{
 
 #permitData{
     text-decoration: underline;
+    position: absolute;
+    display: inline-block;
+}
+
+#permitSeal{
+    width: 200px;
+    height: 150px;
+    background: url(/png/seal.png) no-repeat center;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    display: inline-block;
+    margin-left: 250px;
+    margin-top: -150px;
 }
 
 #vaccine{
@@ -266,7 +297,7 @@ body{
     height: 500px;
     background-color: gray;
     margin: auto;
-    margin-top: 15%;
+    margin-top: 7%;
     display: none;
     border: 3px solid black;
     border-radius: 10px;
