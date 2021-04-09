@@ -401,3 +401,15 @@ body{
     margin-top: 18%;
     display: none;
 }
+
+#randomEventContainer{
+    text-align: center;
+    position: absolute;
+    margin-top: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    display: none;
+
+}

@@ -429,8 +429,6 @@ function updateStats(){
     todayLosses = (fails) * -10;
   }
 
-
-
   var todayTotal = todayEarnings + todayLosses + randomMoney;
   currentSave.balance += todayTotal;
   
@@ -445,8 +443,9 @@ function updateStats(){
 function endDay(){
   hide('gameWindow');
   currentCharacter = null;
-  updateStats();
   uploadProfile();
+  newRandomEvent();
+  updateStats();
   show('statsWindow');
 }
 
@@ -487,18 +486,50 @@ function startTimer(){
 }
 
 function newRandomEvent(){
-  const happened = Math.random() > .90;
+  const happened = Math.random() > .00;
   const positive = Math.random() > .50;
-  const goodPhrases = [];
-  const badPhrases = [];
+  const goodPhrases = [
+    "On the way home you've found some cash. Lucky Day!",
+    "Your boss is happy with you today. Here's your bonus",
+    "While cleaning your workspace you've found a bunch of crumpled paper. Looks like dollar bills!",
+    "Your friend sent you a present!",
+    "After the hard work you decided to go to the casino. Not much but at least something."
+  ];
+  const badPhrases = [
+    "On the way home the brick fell on your head. Insurance expired yesterday. How unlucky!",
+    "You accidentally dropped your phone. Time for reapirs!",
+    "Your dog ate your stash. How nice of him!",
+    "You flooded your neighbor's apartment. Who's gonna pay?",
+    "You dropped your wallet. Part of youe money is gone."
+  ];
   var change;
+  var phrase;
   if(happened){
+    getElement('randomEventContainer').style.display = 'block';
+    const textLabel = getElement('eventText');
+    const changeLabel = getElement('eventChange');
+    change = randInt(10, 300);
     if(positive){
-      change = randInt(10, 500);
+      phrase = goodPhrases[randInt(0, goodPhrases.length)];
+      textLabel.innerHTML = phrase;
+      changeLabel.innerHTML = '+$' + change;
+      changeLabel.style.color = 'green';
+      randomMoney = change;
     }else{
-      change = -randInt(10, 500);
+      phrase = badPhrases[randInt(0, badPhrases.length)];
+      textLabel.innerHTML = phrase;
+      changeLabel.innerHTML = '-$' + change;
+      changeLabel.style.color = 'red';
+      change*=-1;
+      randomMoney = change;
     }
-
+  }else{
+    randomMoney = 0;
+    getElement('randomEventContainer').style.display = 'none';
   }
   
+}
+
+function offerLoan(){
+  //TBD
 }
