@@ -40,6 +40,7 @@ function hideAll(list){
 function updateGUI(){
   var selector = getElement('docSelector');
   var docSelected = selector.value;
+  getElement('nextDayBtn').innerHTML = 'Begin day ' + (currentSave.day + 1);
   if(selector.size != 0){
     showDoc(selector.value);
   }
@@ -438,6 +439,7 @@ function updateStats(){
   getElement('unpredictMoney').innerHTML = 'Unpredicted earnings/losses: ' + randomMoney;
   getElement('totalMoney').innerHTML = 'Total today: ' + todayTotal;
   getElement('balanceMoney').innerHTML = 'Balance: ' + currentSave.balance;
+  getElement('nextDayBtn').innerHTML = 'Begin day ' + (currentSave.day + 1);
 }
 
 function endDay(){

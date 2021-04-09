@@ -176,6 +176,10 @@ body{
     background-color: transparent;
 }
 
+#docSelector:focus{
+    outline: none;
+}
+
 .characterLabels{
     display: block;
     margin: 20px;
