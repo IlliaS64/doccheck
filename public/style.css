@@ -24,6 +24,11 @@
     padding: 10px;
 }
 
+button:focus{
+    outline: none;
+    background-color: orange;
+}
+
 input{
     width: 250px;
     height: 30px;
