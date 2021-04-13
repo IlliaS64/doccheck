@@ -164,6 +164,8 @@ function updateAll(){
 }
 
 function evaluateChoice(buttonId){
+  getElement('approveButton').disabled = true;
+  getElement('denyButton').disabled = true;
   var buttonPressed = buttonId == 'approveButton'
   if(currentCharacter.valid == buttonPressed){
     updateDecLabel(true);
@@ -210,6 +212,8 @@ function updateDecLabel(choice){
 }
 
 function nextCharacter(){
+  getElement('approveButton').disabled = false;
+  getElement('denyButton').disabled = false;
   newCharacter();
   fillDocPacket();
   updateAll();
@@ -382,10 +386,11 @@ function updateSaveLabel(hoverButtonId){
 }
 
 function loadSave(buttonId){
-  var saveNumber = buttonId.split('').pop()
-  var day = currentProfile.progress["progressDay_" + saveNumber];
-  var balance = currentProfile.progress["progressBalance_" + saveNumber];
-  currentSave = {saveNumber: saveNumber, day: day, balance: balance};
+  const saveNumber = buttonId.split('').pop()
+  const day = currentProfile.progress["progressDay_" + saveNumber];
+  const balance = currentProfile.progress["progressBalance_" + saveNumber];
+  const loan = currentProfile.progress["loanPending_" + saveNumber];
+  currentSave = {saveNumber: saveNumber, day: day, balance: balance, loan: loan};
 
   hide('loginPageWindow');
   hide('saveContainer');
@@ -440,20 +445,22 @@ function updateStats(){
   getElement('totalMoney').innerHTML = 'Total today: ' + todayTotal;
   getElement('balanceMoney').innerHTML = 'Balance: ' + currentSave.balance;
   getElement('nextDayBtn').innerHTML = 'Begin day ' + (currentSave.day + 1);
+
+  uploadProfile();
 }
 
 function endDay(){
   hide('gameWindow');
   currentCharacter = null;
-  uploadProfile();
   newRandomEvent();
   updateStats();
+  offerLoan();
   show('statsWindow');
 }
 
 async function uploadProfile(){
   const username = currentProfile.userName;
-  const sendingData = { number: currentSave.saveNumber, username: username, day: currentSave.day, balance: currentSave.balance};
+  const sendingData = { number: currentSave.saveNumber, username: username, day: currentSave.day, balance: currentSave.balance, loan: currentSave.loan};
   const options = {
     method: 'POST',
     headers: {
@@ -467,7 +474,6 @@ async function uploadProfile(){
   const res = await fetch('/updateProfile', options);
   const receivedData = await res.json();
   currentProfile = receivedData;
-
 
 }
 
@@ -488,7 +494,7 @@ function startTimer(){
 }
 
 function newRandomEvent(){
-  const happened = Math.random() > .00;
+  const happened = Math.random() > .90;
   const positive = Math.random() > .50;
   const goodPhrases = [
     "On the way home you've found some cash. Lucky Day!",
@@ -507,7 +513,7 @@ function newRandomEvent(){
   var change;
   var phrase;
   if(happened){
-    getElement('randomEventContainer').style.display = 'block';
+    show('randomEventContainer');
     const textLabel = getElement('eventText');
     const changeLabel = getElement('eventChange');
     change = randInt(10, 300);
@@ -527,15 +533,58 @@ function newRandomEvent(){
     }
   }else{
     randomMoney = 0;
-    getElement('randomEventContainer').style.display = 'none';
+    hide('randomEventContainer');
   }
   
 }
 
-function offerLoan(){
-  //TBD
-}
-
 function capsFirst(text){
   return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function offerLoan(){
+  if(!currentSave.loan){
+    const balance = currentSave.balance;
+    if(balance < 0){
+      show('loanContainer');
+      hide('statsContainer');
+    }
+  }else{
+    gameOver();
+  }
+}
+
+function setLoan(buttonId){
+  if(currentSave.loan && buttonId == 'declineLoan'){
+    gameOver();
+  }else{
+    loadPending = true;
+    currentSave.balance += 1000;
+    currentSave.loan = true;
+    updateStats();
+    hide('loanContainer');
+    show('statsContainer');
+  }  
+}
+
+function repayLoan(){
+  const balance = currentSave.balance;
+  if(balance >= 1000){
+    currentSave.balance - 1000;
+    currentSave.load = false;
+  }else{
+    //TBD
+  }
+}
+
+function eraseProfile(){
+  currentSave.balance = 0;
+  currentSave.day = 0;
+  currentSave.loan = false;
+  uploadProfile();
+}
+
+function gameOver(){
+  //TBD
+  alert('Game Over!');
 }

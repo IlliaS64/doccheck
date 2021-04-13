@@ -95,6 +95,20 @@
           <button type="button" id="nextDayBtn" onclick="nextDay()"> Next Day </button>
           <button type="button" id="backToMenuBtn" onclick="hide('statsWindow'); show('mainMenuWindow'); show('buttonContainer')"> Back to Menu </button>
      </div>
+
+     <div id="loanContainer">
+          <label id="loanLabel">
+               Your balance went below 0.
+               <br>
+               A local agency offered a $1000 loan to you
+               <br>
+               You can accept the offer or lose everything!
+          </label>
+
+          <button id="acceptLoan" class="btn" onclick="setLoan(this.id)">Accept</button>
+          <button id="declineLoan" class="btn" onclick="setLoan(this.id)">Decline</button>
+          
+     </div>
 </div>
 
 <!--GAME VIEW WINDOW-->

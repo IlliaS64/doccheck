@@ -448,3 +448,26 @@ body{
     display: none;
 
 }
+
+#loanContainer{
+    position: absolute;
+    display: block;
+    margin-left: 35%;
+    margin-top: 20%;
+    display: none;
+}
+
+#acceptLoan{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 30px;
+    margin-top: 20px;
+}
+
+#declineLoan{
+   position: relative;
+    display: block;
+    width: 100%;
+    height: 30px;
+}
