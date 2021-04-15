@@ -20,7 +20,7 @@ const profileSchema = new Schema({
             required: true
         },
         loanPending_1:{
-            type: 'Boolean',
+            type: 'Number',
             required: true
         },
         progressDay_2:{
@@ -32,7 +32,7 @@ const profileSchema = new Schema({
             required: false
         },
         loanPending_2:{
-            type: 'Boolean',
+            type: 'Number',
             required: true
         },
         progressDay_3:{
@@ -44,7 +44,7 @@ const profileSchema = new Schema({
             required: false
         },
         loanPending_3:{
-            type: 'Boolean',
+            type: 'Number',
             required: true
         }
     }

@@ -366,6 +366,10 @@ body{
     padding: 10px;
 }
 
+#loanMoney{
+    color: red;
+}
+
 .statsLabel{
     position: relative;
     display: block;
@@ -392,6 +396,25 @@ body{
     border-color: orange;
 }
 
+#payLoanBtn{
+    width: 200px;
+    height: 40px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    background-color: #424756;
+    border: 2px solid black;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 6%;
+}
+
+#payLoanBtn:hover{
+    border-color: orange;
+}
+
 #backToMenuBtn{
     width: 200px;
     height: 40px;
@@ -404,7 +427,7 @@ body{
     border: 2px solid black;
     text-align: center;
     border-radius: 20px;
-    margin-top: 7%;
+    margin-top: 10%;
 }
 
 #backToMenuBtn:hover{

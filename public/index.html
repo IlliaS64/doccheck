@@ -92,7 +92,9 @@
           <label id="unpredictMoney" class="statsLabel">Unpredicted earnings/losses: </label>
           <label id="totalMoney" class="statsLabel">Total today: </label>
           <label id="balanceMoney" class="statsLabel">Balance: </label>
+          <label id="loanMoney" class="statsLabel">Loan Pending: </label>
           <button type="button" id="nextDayBtn" onclick="nextDay()"> Next Day </button>
+          <button type="button" id="payLoanBtn" onclick="payLoan()"> Repay Loan </button>
           <button type="button" id="backToMenuBtn" onclick="hide('statsWindow'); show('mainMenuWindow'); show('buttonContainer')"> Back to Menu </button>
      </div>
 
@@ -100,7 +102,7 @@
           <label id="loanLabel">
                Your balance went below 0.
                <br>
-               A local agency offered a $1000 loan to you
+               A local agency offered a $1000 loan with 10.5% daily interest
                <br>
                You can accept the offer or lose everything!
           </label>

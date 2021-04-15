@@ -412,6 +412,7 @@ function nextDay(){
   startTimer();
   resetStats();
   currentSave.day++;
+  addInterest();
   hide('statsWindow');
   show('gameWindow');
   nextCharacter();
@@ -445,7 +446,7 @@ function updateStats(){
   getElement('totalMoney').innerHTML = 'Total today: ' + todayTotal;
   getElement('balanceMoney').innerHTML = 'Balance: ' + currentSave.balance;
   getElement('nextDayBtn').innerHTML = 'Begin day ' + (currentSave.day + 1);
-
+  getElement('loanMoney').innerHTML = 'Loan Pending: ' + currentSave.loan;
   uploadProfile();
 }
 
@@ -543,38 +544,59 @@ function capsFirst(text){
 }
 
 function offerLoan(){
-  if(!currentSave.loan){
-    const balance = currentSave.balance;
+  const hasLoan = currentSave.loan > 0;
+  const balance = currentSave.balance;
+  if(hasLoan && balance < 1){
+    gameOver();
+  }else{
     if(balance < 0){
       show('loanContainer');
       hide('statsContainer');
     }
-  }else{
-    gameOver();
   }
 }
 
 function setLoan(buttonId){
-  if(currentSave.loan && buttonId == 'declineLoan'){
+  const hasLoan = currentSave.loan > 0;
+  if(hasLoan && buttonId == 'declineLoan'){
     gameOver();
   }else{
-    loadPending = true;
     currentSave.balance += 1000;
-    currentSave.loan = true;
+    currentSave.loan = 1000;
     updateStats();
     hide('loanContainer');
     show('statsContainer');
+    show('loanMoney');
+    show('payLoanBtn');
   }  
 }
 
-function repayLoan(){
+function payLoan(){
+  const hasLoan = currentSave.loan > 0;
+  const loan = currentSave.loan;
   const balance = currentSave.balance;
-  if(balance >= 1000){
-    currentSave.balance - 1000;
-    currentSave.load = false;
-  }else{
-    //TBD
+  if(hasLoan){
+    if(balance > loan){
+      currentSave.balance -= loan;
+      currentSave.loan -= loan;
+    }else{
+      currentSave.loan -= balance;
+      currentSave.balance -= balance;
+    }
+
+    if(currentSave.loan <= 0){
+      hide('loanMoney');
+      hide('payLoanBtn');
+    }
+
+    updateStats();
   }
+}
+
+function addInterest(){
+  const interest = 10.5;
+  const multipiler = interest/100;
+  currentSave.loan = Math.ceil(currentSave.loan + currentSave.loan * multipiler);
 }
 
 function eraseProfile(){
