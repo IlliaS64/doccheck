@@ -357,7 +357,7 @@ body{
 #statsContainer{
     width: auto;
     height: auto;
-    position: relative;
+    position: absolute;
     left:0;
     right:0;
     margin-left:auto;
@@ -377,61 +377,24 @@ body{
     text-align: center;
 }
 
-#nextDayBtn{
+#nextDayBtn, #payLoanBtn, #backToMenuBtn{
+    position: relative;
     width: 200px;
-    height: 40px;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    background-color: #424756;
+    height: 30px;
+    display: block;
+    margin-top: 10px;
+    margin-left: 42.8%;
+    background-color: transparent;
     border: 2px solid black;
-    text-align: center;
-    border-radius: 20px;
-    margin-top: 2%;
+    border-radius: 30px;
 }
 
-#nextDayBtn:hover{
+#nextDayBtn:hover, #payLoanBtn:hover, #backToMenuBtn:hover{
     border-color: orange;
 }
 
-#payLoanBtn{
-    width: 200px;
-    height: 40px;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    background-color: #424756;
-    border: 2px solid black;
-    text-align: center;
-    border-radius: 20px;
-    margin-top: 6%;
-}
-
-#payLoanBtn:hover{
-    border-color: orange;
-}
-
-#backToMenuBtn{
-    width: 200px;
-    height: 40px;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    background-color: #424756;
-    border: 2px solid black;
-    text-align: center;
-    border-radius: 20px;
-    margin-top: 10%;
-}
-
-#backToMenuBtn:hover{
-    border-color: orange;
+#nextDayBtn:active, #payLoanBtn:active, #backToMenuBtn:active{
+    background-color: orange;
 }
 
 #currentDay{
@@ -475,7 +438,7 @@ body{
 #loanContainer{
     position: absolute;
     display: block;
-    margin-left: 35%;
+    margin-left: 30%;
     margin-top: 20%;
     display: none;
 }

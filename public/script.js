@@ -446,7 +446,11 @@ function updateStats(){
   getElement('totalMoney').innerHTML = 'Total today: ' + todayTotal;
   getElement('balanceMoney').innerHTML = 'Balance: ' + currentSave.balance;
   getElement('nextDayBtn').innerHTML = 'Begin day ' + (currentSave.day + 1);
-  getElement('loanMoney').innerHTML = 'Loan Pending: ' + currentSave.loan;
+  hide('loanMoney');
+  if(currentSave.loan > 0){
+    getElement('loanMoney').innerHTML = 'Loan Pending: ' + currentSave.loan;
+    show('loanMoney');
+  }
   uploadProfile();
 }
 
@@ -483,7 +487,6 @@ function startTimer(){
   var timeLeft = defaultTime;
   
   var timer = setInterval(function(){
-    
     timeLeft-=0.1;
     getElement('timeLine').style.width = timeLeft/defaultTime*100 + '%';
     if(timeLeft <= 0.01){
