@@ -1,5 +1,4 @@
 //const { get } = require("node:https");
-const reader = new FileReader();
 const documentList = ['passport', 'visa', 'permit', 'vaccine'];
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const numbers = '0123456789';
@@ -117,8 +116,17 @@ function newDocument(character, docType){
 
 function fillDocPacket(){
   currentCharacter.docPacket = [];
+  var length;
 
-  for(var i = 0; i < docLength; i++){
+  if(currentSave > 15){
+    length = docLength;
+  }else if(currentSave > 5){
+    length = docLength--;
+  }else{
+    length = docLength-2;
+  }
+
+  for(var i = 0; i < length; i++){
     currentCharacter.docPacket.push(newDocument(currentCharacter, documentList[i]));
   }
 
