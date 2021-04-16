@@ -101,7 +101,6 @@ app.post('/updateProfile', (req, res) => {
     var update;
     Profile.findOne({userName: userName})
         .then((result) =>{
-            console.log(result);
             update = result;
             switch(saveNumber){
                 case '1':{

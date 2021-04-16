@@ -42,16 +42,16 @@
           You were selected to maintain peace in your country and check all the immigrants who are trying to cross the border.<br>
           Make sure you do your job well:<br>
      </p>
-     <ol>
+     <ul>
           <li>Check all documents for validity</li>
           <li>Reject everyone who has invalid documents</li>
           <li>Everyone who has valid documents are allowed </li>
           <li>Watch the timer. You have to be quick</li>
           <li>For every correct decision you'll get $20</li>
-          <li>You are only allowed two mistakes. Otherwise $10 will be lost</li>
-          <li>Watch your balance. Don't fall in dept.</li>
+          <li>You are only allowed two mistakes. Every next mistake will cost $10</li>
+          <li>Watch your balance. Don't fall in debt.</li>
           <li>Random events that will affect your life may happen</li>
-     </ol>
+     </ul>
 
     <button id="backToMenu" class="btn" onclick="hide('helpWindow');show('mainMenuWindow')">Back</button>
      
@@ -92,9 +92,9 @@
                <label id="eventText">Text</label>
                <label id="eventChange">Change</label>
           </div>
-          <button type="button" id="nextDayBtn" onclick="nextDay()"> Next Day </button>
-          <button type="button" id="payLoanBtn" onclick="payLoan()"> Repay Loan </button>
-          <button type="button" id="backToMenuBtn" onclick="hide('statsWindow'); show('mainMenuWindow'); show('buttonContainer')"> Back to Menu </button>
+          <button type="button" class="statsBtn" id="nextDayBtn" onclick="nextDay()"> Next Day </button>
+          <button type="button" class="statsBtn" id="payLoanBtn" onclick="payLoan()"> Repay Loan </button>
+          <button type="button" class="statsBtn" id="backToMenuBtn" onclick="hide('statsWindow'); show('mainMenuWindow'); show('buttonContainer')"> Back to Menu </button>
      </div>
 
      <div id="loanContainer">

@@ -9,6 +9,7 @@
     right:0;
     margin-left:auto;
     margin-right:auto;
+    margin-top: 100px;
     text-align: center;
     line-height: 40px;
     display: none;
@@ -377,7 +378,7 @@ body{
     text-align: center;
 }
 
-#nextDayBtn, #payLoanBtn, #backToMenuBtn{
+.statsBtn{
     position: relative;
     width: 200px;
     height: 30px;
@@ -387,6 +388,10 @@ body{
     background-color: transparent;
     border: 2px solid black;
     border-radius: 30px;
+}
+
+#payLoanBtn{
+    display: none;
 }
 
 #nextDayBtn:hover, #payLoanBtn:hover, #backToMenuBtn:hover{
