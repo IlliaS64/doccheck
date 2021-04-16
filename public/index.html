@@ -80,11 +80,6 @@
 <!--STATS WINDOW-->
 <div id="statsWindow">
 
-     <div id="randomEventContainer">
-          <label id="eventText">Text</label>
-          <label id="eventChange">Change</label>
-     </div>
-
      <div id="statsContainer">
           <label id="currentDay" class="statsLabel">Day 0</label>
           <label id="gainedMoney" class="statsLabel">Earned today: </label>
@@ -93,6 +88,10 @@
           <label id="totalMoney" class="statsLabel">Total today: </label>
           <label id="balanceMoney" class="statsLabel">Balance: </label>
           <label id="loanMoney" class="statsLabel">Loan Pending: </label>
+          <div id="randomEventContainer">
+               <label id="eventText">Text</label>
+               <label id="eventChange">Change</label>
+          </div>
           <button type="button" id="nextDayBtn" onclick="nextDay()"> Next Day </button>
           <button type="button" id="payLoanBtn" onclick="payLoan()"> Repay Loan </button>
           <button type="button" id="backToMenuBtn" onclick="hide('statsWindow'); show('mainMenuWindow'); show('buttonContainer')"> Back to Menu </button>

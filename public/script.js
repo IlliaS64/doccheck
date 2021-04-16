@@ -116,14 +116,12 @@ function newDocument(character, docType){
 
 function fillDocPacket(){
   currentCharacter.docPacket = [];
-  var length;
-
-  if(currentSave > 15){
-    length = docLength;
-  }else if(currentSave > 5){
-    length = docLength--;
+  var length = docLength;;
+  
+  if(currentSave.day >= 5 && currentSave.day < 15){
+    length--;
   }else{
-    length = docLength-2;
+    length-2;
   }
 
   for(var i = 0; i < length; i++){
@@ -131,7 +129,7 @@ function fillDocPacket(){
   }
 
   fillSelector(getElement('docSelector'), currentCharacter.docPacket);
-
+  return length;
 }
 
 function fillSelector(seleclor, list){
@@ -588,10 +586,10 @@ function payLoan(){
   const balance = currentSave.balance;
   if(hasLoan){
     if(balance > loan){
-      currentSave.balance -= loan;
+      currentSave.balance = balance - loan;
       currentSave.loan -= loan;
     }else{
-      currentSave.loan -= balance;
+      currentSave.loan = loan - balance;
       currentSave.balance -= balance;
     }
 

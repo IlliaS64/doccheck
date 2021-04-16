@@ -53,8 +53,6 @@ app.post('/loginuser', (req, res) =>{
 app.post('/addnewprofile', (req, res) =>{
     var username = req.body.username;
     var password = req.body.password;
-    console.log(req.body);
-
     Profile.findOne({userName: username})
         .then((result) => {
             if(result != null){
@@ -97,7 +95,6 @@ app.post('/updateProfile', (req, res) => {
     const saveNumber = req.body.number;
     const userName = req.body.username;
     var update;
-    console.log(req);
     Profile.findOne({userName: userName})
         .then((result) =>{
             console.log(result);
@@ -126,7 +123,6 @@ app.post('/updateProfile', (req, res) => {
         
             Profile.findOneAndUpdate({userName: userName}, update, {new: true})
                 .then((result) => {
-                    console.log(result);
                     res.json(result);
                 })
                 .catch((err) => {
