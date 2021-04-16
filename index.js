@@ -5,6 +5,7 @@ const path = require('path');
 const Profile = require('./models/profile.js');
 const PORT = process.env.PORT || 5000;
 const fs = require('fs');
+const favicon = require('serve-favicon');
 
 //MongoDB
 const url = "mongodb+srv://admin:ConnorRK800@savecluster.qzpgr.mongodb.net/player_profiles?retryWrites=true&w=majority";
@@ -18,13 +19,16 @@ app.use(express.urlencoded({ extended: false }));
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Set Favicon
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 //connect to MongoDB and start server
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false})
     .then((result) => app.listen(PORT, () => console.log(`Server started on port ${PORT}`)))
     .catch((err) => console.log(err))
 
-//BODY
+
+//---------MAIN----------
 
 app.post('/updatenames', (req, res) => {
     var type = req.body.type;
