@@ -120,7 +120,7 @@ function fillDocPacket(){
   
   if(currentSave.day >= 5 && currentSave.day < 15){
     length--;
-  }else{
+  }else if(currentSave.day < 5){
     length-2;
   }
 

@@ -82,6 +82,14 @@ input:focus{
     border-color: orange;
 }
 
+#quitButton:hover, #backSave:hover, #backToMenu:hover, #backToMenuBtn:hover{
+    border-color: red;
+}
+
+#quitButton:active, #backSave:active, #backToMenu:active, #backToMenuBtn:active{
+    background-color: red;
+    border-color: black;
+}
 
 
 body{
@@ -332,7 +340,7 @@ body{
 
 #approveButton:active{
     color: green;
-    
+    border-color: black;
 }
 
 #denyButton:hover{
@@ -341,6 +349,7 @@ body{
 
 #denyButton:active{
     color: red;
+    border-color: black;
 }
 
 #gameWindow{
@@ -378,7 +387,7 @@ body{
     text-align: center;
 }
 
-.statsBtn{
+#nextDayBtn, #payLoanBtn, #backToMenuBtn{
     position: relative;
     width: 200px;
     height: 30px;
@@ -390,16 +399,13 @@ body{
     border-radius: 30px;
 }
 
-#payLoanBtn{
-    display: none;
-}
-
-#nextDayBtn:hover, #payLoanBtn:hover, #backToMenuBtn:hover{
+#nextDayBtn:hover, #payLoanBtn:hover{
     border-color: orange;
 }
 
-#nextDayBtn:active, #payLoanBtn:active, #backToMenuBtn:active{
+#nextDayBtn:active, #payLoanBtn:active{
     background-color: orange;
+    border-color: black;
 }
 
 #currentDay{
