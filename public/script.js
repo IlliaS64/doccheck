@@ -119,7 +119,7 @@ function fillDocPacket(){
   var length = docLength;;
   
   if(currentSave.day < 5){
-    length-2;
+    length-=2;
   }else if(currentSave.day >= 5 && currentSave.day < 15){
     length--;
   }
@@ -272,6 +272,12 @@ function spoilValue(value){
         return value.replace(char, possible[randInt(0, possible.length)]);
       }else{
         var possible = letters.replace(letters.indexOf(char.toUpperCase()), '');
+        if(char == 'M'){
+          return 'F';
+        }
+        if(char == 'F'){
+          return 'M';
+        }
         if (char == char.toUpperCase()) {
             //If uppercase letter
             return value.replace(char, possible[randInt(0, possible.length)]);
