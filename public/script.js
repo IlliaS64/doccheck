@@ -118,10 +118,10 @@ function fillDocPacket(){
   currentCharacter.docPacket = [];
   var length = docLength;;
   
-  if(currentSave.day >= 5 && currentSave.day < 15){
-    length--;
-  }else if(currentSave.day < 5){
+  if(currentSave.day < 5){
     length-2;
+  }else if(currentSave.day >= 5 && currentSave.day < 15){
+    length--;
   }
 
   for(var i = 0; i < length; i++){
