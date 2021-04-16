@@ -24,8 +24,8 @@
           <label id="loginLabel">PLEASE LOG IN TO CONTINUE</label>
      
           <form action="javascript:loginUser();" method="POST">
-               <input type="text" id="usernameInput" placeholder="Username" name="Username">
-               <input type="password" id="passwordInput" placeholder="Password" name="Password">
+               <input type="text" id="usernameInput" placeholder="Username" name="Username" minlength="8">
+               <input type="password" id="passwordInput" placeholder="Password" name="Password" minlength="8">
                <button type="submit" class="loginBtn" id="loginBtn">Log In</button>
                <button type="button" class="loginBtn" id="signupBtn" onclick="addProfile()">Sign Up</button>
           </form>

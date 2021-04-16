@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Set Favicon
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
-//connect to MongoDB and start server
+//connect to profle database and start server
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false})
     .then((result) => app.listen(PORT, () => console.log(`Server started on port ${PORT}`)))
     .catch((err) => console.log(err))

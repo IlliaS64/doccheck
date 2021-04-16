@@ -235,7 +235,6 @@ function nextCharacter(){
     wrongDoc = spoilDoc();
     wrongDoc[0] = wrongDoc[0].toUpperCase();
   }
-
   getElement('docSelector').selectedIndex = -1;
   show('docSelector');
   hide('nextCharacter');
@@ -302,6 +301,8 @@ async function addProfile(){
     getElement('errorLabel').innerHTML = 'Username or Password cannot contain spaces. Try again!';
   }else if(username == '' || password == '' ){
     getElement('errorLabel').innerHTML = 'Username or Password cannot be blank. Try again!';
+  }else if(username.length < 8 || password.length < 8){
+    getElement('errorLabel').innerHTML = 'Username or Password must consist of at least 8 characters.';
   }else{
     const sendingData = { username, password }
     const options = {
