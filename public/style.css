@@ -380,6 +380,7 @@ body{
     color: red;
 }
 
+
 .statsLabel{
     position: relative;
     display: block;
@@ -387,7 +388,7 @@ body{
     text-align: center;
 }
 
-#nextDayBtn, #payLoanBtn, #backToMenuBtn{
+#nextDayBtn, #payLoanBtn, #backToMenuBtn, #deleteSaveBtn{
     position: relative;
     width: 200px;
     height: 30px;
@@ -406,6 +407,15 @@ body{
 #nextDayBtn:active, #payLoanBtn:active{
     background-color: orange;
     border-color: black;
+}
+
+#payLoanBtn{
+    display: none;
+}
+
+#deleteSaveBtn{
+    border-color: red;
+    color: red;
 }
 
 #currentDay{
@@ -465,4 +475,56 @@ body{
     display: block;
     width: 100%;
     height: 30px;
+}
+
+#gameOverLabel{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    font-size: 56px;
+    margin-top: 15%;
+}
+
+#gameOverString{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 20%;
+}
+
+#backFromOverBtn{
+    position: absolute;
+    margin-top: 25%;
+    margin-left: 43%
+}
+
+#gameOverWindow{
+    display: none;
+}
+
+#creditsWindow{
+    display: none;
+}
+
+#creditsTitle{
+    position: absolute;
+    font-size: 48px;
+    width: 100%;
+    text-align: center;
+    margin-top: 4%;
+}
+
+#credits{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    display: block;
+    margin-top: 10%;
+}
+.creditsLbl{
+    position: relative;
+    display: block;
+}
+#backFromCredits{
+    margin-top: 5%;
 }

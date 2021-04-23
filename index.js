@@ -67,16 +67,16 @@ app.post('/addnewprofile', (req, res) =>{
                     userPassword: password,
                     progress:{
                         //save_1
-                        progressDay_1: 0,
-                        progressBalance_1: randInt(100, 500),
+                        progressDay_1: -1,
+                        progressBalance_1: -1,
                         loanPending_1: 0,
                         //save_2
-                        progressDay_2: 0,
-                        progressBalance_2: randInt(100, 500),
+                        progressDay_2: -1,
+                        progressBalance_2: -1,
                         loanPending_2: 0,
                         //save_3
-                        progressDay_3: 0,
-                        progressBalance_3: randInt(100, 500),
+                        progressDay_3: -1,
+                        progressBalance_3: -1,
                         loanPending_3: 0
                     }
                 });

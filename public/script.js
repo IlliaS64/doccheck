@@ -1,11 +1,14 @@
+//DON'T FORGET TO CREDIT https://charactercreator.org/#
+
 //const { get } = require("node:https");
 const documentList = ['passport', 'visa', 'permit', 'vaccine'];
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const numbers = '0123456789';
 const docLength = documentList.length;
-var maleNames = ['Bob', 'Mike', 'John'];
-var femaleNames = ['Alice', 'Abby', 'Ellie'];
-var lastNames = ['White', 'Johnson', 'Fletcher'];
+var windowList = []
+var maleNames = [];
+var femaleNames = [];
+var lastNames = [];
 
 var wrongDoc = null;
 var currentChoice;
@@ -18,12 +21,27 @@ var fails;
 var rights;
 var randomMoney;
 
+function updateWindowList(){
+  windowList = [];
+  const divList = document.getElementsByClassName('container');
+  for(var i = 0; i < divList.length; i++){
+    var id = divList[i].id;
+    windowList.push(id);
+  }
+}
+
 function hide(element) {
   getElement(element).style.display = 'none';
 }
 
 function show(element) {
   getElement(element).style.display = 'block';
+}
+
+function hideAllWindows(){
+  for(var i = 0; i < windowList.length; i++){
+    hide(windowList[0]);
+  }
 }
 
 function getElement(id) {
@@ -400,21 +418,27 @@ function updateSaveLabel(hoverButtonId){
 
 function loadSave(buttonId){
   const saveNumber = buttonId.split('').pop()
-  const day = currentProfile.progress["progressDay_" + saveNumber];
-  const balance = currentProfile.progress["progressBalance_" + saveNumber];
-  const loan = currentProfile.progress["loanPending_" + saveNumber];
-  currentSave = {saveNumber: saveNumber, day: day, balance: balance, loan: loan};
+  if(currentProfile.progress['progressDay_' + saveNumber] < 0){
+    addSave(saveNumber);
+    getElement('saveInfoLabel').innerHTML = 'New save created! Click the button again to start the game.'
+  }else{
+    const day = currentProfile.progress["progressDay_" + saveNumber];
+    const balance = currentProfile.progress["progressBalance_" + saveNumber];
+    const loan = currentProfile.progress["loanPending_" + saveNumber];
+    currentSave = {saveNumber: saveNumber, day: day, balance: balance, loan: loan};
 
-  hide('loginPageWindow');
-  hide('saveContainer');
-  show('statsWindow');
+    hide('loginPageWindow');
+    hide('saveContainer');
+    show('statsWindow');
+  }
+
+  
   resetStats();
   updateStats();
+  uploadProfile();
 }
 
-
 function logOut(){
-  //TBD
   currentSave = null;
   currentProfile = null;
   hide('mainMenuWindow');
@@ -464,6 +488,8 @@ function updateStats(){
     getElement('loanMoney').innerHTML = 'Loan Pending: ' + currentSave.loan;
     show('loanMoney');
   }
+
+  //isGameOver();
   uploadProfile();
 }
 
@@ -492,7 +518,6 @@ async function uploadProfile(){
   const res = await fetch('/updateProfile', options);
   const receivedData = await res.json();
   currentProfile = receivedData;
-
 }
 
 function startTimer(){
@@ -516,7 +541,7 @@ function newRandomEvent(){
   const goodPhrases = [
     "On the way home you've found some cash. Lucky Day!",
     "Your boss is happy with you today. Here's your bonus",
-    "While cleaning your workspace you've found a bunch of crumpled paper. Looks like dollar bills!",
+    "While cleaning your workspace you found a bunch of crumpled paper. Looks like some dollar bills!",
     "Your friend sent you a present!",
     "After the hard work you decided to go to the casino. Not much but at least something."
   ];
@@ -525,7 +550,7 @@ function newRandomEvent(){
     "You accidentally dropped your phone. Time for reapirs!",
     "Your dog ate your stash. How nice of him!",
     "You flooded your neighbor's apartment. Who's gonna pay?",
-    "You dropped your wallet. Part of youe money is gone."
+    "You lost your wallet. Some of your money is gone."
   ];
   var change;
   var phrase;
@@ -562,8 +587,8 @@ function capsFirst(text){
 function offerLoan(){
   const hasLoan = currentSave.loan > 0;
   const balance = currentSave.balance;
-  if(hasLoan && balance < 1){
-    gameOver();
+  if(hasLoan && balance < 0){
+    isGameOver();
   }else{
     if(balance < 0){
       show('loanContainer');
@@ -604,7 +629,6 @@ function payLoan(){
       hide('loanMoney');
       hide('payLoanBtn');
     }
-
     updateStats();
   }
 }
@@ -615,14 +639,50 @@ function addInterest(){
   currentSave.loan = Math.ceil(currentSave.loan + currentSave.loan * multipiler);
 }
 
-function eraseProfile(){
-  currentSave.balance = 0;
-  currentSave.day = 0;
-  currentSave.loan = false;
+function deleteSave(){
+  currentSave.balance = -1;
+  currentSave.day = -1;
+  currentSave.loan = 0;
+  uploadProfile();
+  hide('statsWindow');
+  show('mainMenuWindow');
+  hide('buttonContainer');
+  show('saveContainer');
+}
+
+function addSave(saveNumber){
+  const day = 0;
+  const balance = randInt(100, 300);
+  const loan = 0;
+  currentSave = {saveNumber: saveNumber, day: day, balance: balance, loan: loan};
   uploadProfile();
 }
 
-function gameOver(){
-  //TBD
-  alert('Game Over!');
+function isGameOver(){
+  const balance = currentSave.balance;
+  const hasLoan = currentSave.loan > 0;
+  const day = currentSave.day;
+  deleteSave();
+
+  if(balance >= 100000){
+    showGoodEnding();
+  }else{
+    showBadEnding();
+  }
+
+  hide('statsWindow');
+  hide('mainMenuWindow');
+  hide('saveContainer');
+  show('gameOverWindow');
+  show('buttonContainer');
+}
+
+function showBadEnding(){
+  getElement('gameOverString').innerHTML = 'You cant pay your bills anymore. How it feels to be broke?';
+  getElement('backFromOverBtn').innerText = 'Start Over';  
+}
+
+function showGoodEnding(){
+  getElement('gameOverString').innerHTML = 'Dreams come true! Hope $100,000 in your wallet will make you happy.';
+  getElement('backFromOverBtn').innerText = 'New Game';
 }

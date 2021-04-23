@@ -10,193 +10,211 @@
 
 </head>
 
-<body onload="updateNames()">
+<body onload="updateNames();updateWindowList();">
 
-
-<!--LOGIN PAGE WINDOW-->
-<div id="loginPageWindow">
-     <div id="titleContainer">
-          <label id="titleLabel">YABS</label>
-          <label id="titleWords">Yet Another Border Simulator</label>
+     <!--LOGIN PAGE WINDOW-->
+     <div id="loginPageWindow" class="container">
+          <div id="titleContainer">
+               <label id="titleLabel">YABS</label>
+               <label id="titleWords">Yet Another Border Simulator</label>
+          </div>
+          
+          <div id="loginInfoContainer">
+               <label id="loginLabel">PLEASE LOG IN TO CONTINUE</label>
+          
+               <form action="javascript:loginUser();" method="POST">
+                    <input type="text" id="usernameInput" placeholder="Username" name="Username" minlength="8">
+                    <input type="password" id="passwordInput" placeholder="Password" name="Password" minlength="8">
+                    <button type="submit" class="loginBtn" id="loginBtn">Log In</button>
+                    <button type="button" class="loginBtn" id="signupBtn" onclick="addProfile()">Sign Up</button>
+               </form>
+               <label id="errorLabel" style="color: red;" name="errorLabel"></label>
+               <label id="successLabel" style="color: green;" name="successLabel"></label>
+               
+          </div>
      </div>
-     
-     <div id="loginInfoContainer">
-          <label id="loginLabel">PLEASE LOG IN TO CONTINUE</label>
-     
-          <form action="javascript:loginUser();" method="POST">
-               <input type="text" id="usernameInput" placeholder="Username" name="Username" minlength="8">
-               <input type="password" id="passwordInput" placeholder="Password" name="Password" minlength="8">
-               <button type="submit" class="loginBtn" id="loginBtn">Log In</button>
-               <button type="button" class="loginBtn" id="signupBtn" onclick="addProfile()">Sign Up</button>
-          </form>
-          <label id="errorLabel" style="color: red;" name="errorLabel"></label>
-          <label id="successLabel" style="color: green;" name="successLabel"></label>
+
+     <!--HELP WINDOW-->
+     <div id="helpWindow" class="container">
+          <p id="helpInfo">
+               Welcome to YABS!<br>
+               You were selected to maintain peace in your country and check all the immigrants who are trying to cross the border.<br>
+               Make sure you do your job well:<br>
+          </p>
+          <ul>
+               <li>Check all documents for validity</li>
+               <li>Reject everyone who has invalid documents</li>
+               <li>Everyone who has valid documents are allowed </li>
+               <li>Watch the timer. You have to be quick</li>
+               <li>For every correct decision you'll get $20</li>
+               <li>You are only allowed two mistakes. Every next mistake will cost $10</li>
+               <li>Watch your balance. Don't fall in debt.</li>
+               <li>Random events that will affect your life may happen</li>
+          </ul>
+
+     <button id="backToMenu" class="btn" onclick="hide('helpWindow');show('mainMenuWindow')">Back</button>
           
      </div>
-</div>
 
-<!--HELP WINDOW-->
-<div id="helpWindow">
-     <p id="helpInfo">
-          Welcome to YABS!<br>
-          You were selected to maintain peace in your country and check all the immigrants who are trying to cross the border.<br>
-          Make sure you do your job well:<br>
-     </p>
-     <ul>
-          <li>Check all documents for validity</li>
-          <li>Reject everyone who has invalid documents</li>
-          <li>Everyone who has valid documents are allowed </li>
-          <li>Watch the timer. You have to be quick</li>
-          <li>For every correct decision you'll get $20</li>
-          <li>You are only allowed two mistakes. Every next mistake will cost $10</li>
-          <li>Watch your balance. Don't fall in debt.</li>
-          <li>Random events that will affect your life may happen</li>
-     </ul>
+     <!--MAIN MENU WINDOW-->
 
-    <button id="backToMenu" class="btn" onclick="hide('helpWindow');show('mainMenuWindow')">Back</button>
-     
-</div>
-
-<!--MAIN MENU WINDOW-->
-
-<div id="mainMenuWindow">
-     <div id="buttonContainer">
-          <p id="loggedInAs">Logged in as: </p>
-          <button type="button" class="btn" id="playButton" onclick="hide('buttonContainer');show('saveContainer')">Play</button>
-          <button type="button" class="btn" id="helpButton" onclick="hide('mainMenuWindow');show('helpWindow')">Help</button>
-          <button type="button" class="btn" id="creditsButton">Credits</button>
-          <button type="button" class="btn" id="quitButton" onclick="logOut()">Quit</button>
-     </div>
-
-     <div id="saveContainer">
-          <p id="saveInfoLabel"></p>
-          <button type="button" class="btn" id="save_1" onmouseover="updateSaveLabel(this.id)" onclick="loadSave(this.id)">Save 1</button>
-          <button type="button" class="btn" id="save_2" onmouseover="updateSaveLabel(this.id)" onclick="loadSave(this.id)">Save 2</button>
-          <button type="button" class="btn" id="save_3" onmouseover="updateSaveLabel(this.id)" onclick="loadSave(this.id)">Save 3</button>
-          <button type="button" class="btn" id="backSave" onclick="hide('saveContainer');show('buttonContainer')">Back</button>
-     </div>
-</div>
-
-<!--STATS WINDOW-->
-<div id="statsWindow">
-
-     <div id="statsContainer">
-          <label id="currentDay" class="statsLabel">Day 0</label>
-          <label id="gainedMoney" class="statsLabel">Earned today: </label>
-          <label id="lostMoney" class="statsLabel">Deductions: </label>
-          <label id="unpredictMoney" class="statsLabel">Unpredicted earnings/losses: </label>
-          <label id="totalMoney" class="statsLabel">Total today: </label>
-          <label id="balanceMoney" class="statsLabel">Balance: </label>
-          <label id="loanMoney" class="statsLabel">Loan Pending: </label>
-          <div id="randomEventContainer">
-               <label id="eventText">Text</label>
-               <label id="eventChange">Change</label>
+     <div id="mainMenuWindow" class="container">
+          <div id="buttonContainer">
+               <p id="loggedInAs">Logged in as: </p>
+               <button type="button" class="btn" id="playButton" onclick="hide('buttonContainer');show('saveContainer');">Play</button>
+               <button type="button" class="btn" id="helpButton" onclick="hide('mainMenuWindow');show('helpWindow');">Help</button>
+               <button type="button" class="btn" id="creditsButton" onclick="hide('mainMenuWindow');show('creditsWindow');">Credits</button>
+               <button type="button" class="btn" id="quitButton" onclick="logOut()">Quit</button>
           </div>
-          <button type="button" class="statsBtn" id="nextDayBtn" onclick="nextDay()"> Next Day </button>
-          <button type="button" class="statsBtn" id="payLoanBtn" onclick="payLoan()"> Repay Loan </button>
-          <button type="button" class="statsBtn" id="backToMenuBtn" onclick="hide('statsWindow'); show('mainMenuWindow'); show('buttonContainer')"> Back to Menu </button>
+
+          <div id="saveContainer">
+               <p id="saveInfoLabel"></p>
+               <button type="button" class="btn" id="save_1" onmouseover="updateSaveLabel(this.id)" onclick="loadSave(this.id)">Save#1</button>
+               <button type="button" class="btn" id="save_2" onmouseover="updateSaveLabel(this.id)" onclick="loadSave(this.id)">Save#2</button>
+               <button type="button" class="btn" id="save_3" onmouseover="updateSaveLabel(this.id)" onclick="loadSave(this.id);">Save#3</button>
+               <button type="button" class="btn" id="backSave" onclick="hide('saveContainer');show('buttonContainer')">Back</button>
+          </div>
      </div>
 
-     <div id="loanContainer">
-          <label id="loanLabel">
-               Your balance went below 0.
-               <br>
-               A local agency offered a $1000 loan with 10.5% daily interest
-               <br>
-               You can accept the offer or lose everything!
-          </label>
+     <!--STATS WINDOW-->
+     <div id="statsWindow" class="container">
+          <div id="statsContainer" class="container">
+               <label id="currentDay" class="statsLabel">Day 0</label>
+               <label id="gainedMoney" class="statsLabel">Earned today: </label>
+               <label id="lostMoney" class="statsLabel">Deductions: </label>
+               <label id="unpredictMoney" class="statsLabel">Unpredicted earnings/losses: </label>
+               <label id="totalMoney" class="statsLabel">Total today: </label>
+               <label id="balanceMoney" class="statsLabel">Balance: </label>
+               <label id="loanMoney" class="statsLabel">Loan Pending: </label>
+               <div id="randomEventContainer">
+                    <label id="eventText">Text</label>
+                    <label id="eventChange">Change</label>
+               </div>
+               <button type="button" class="statsBtn" id="nextDayBtn" onclick="nextDay()"> Next Day </button>
+               <button type="button" class="statsBtn" id="payLoanBtn" onclick="payLoan()"> Repay Loan </button>
+               <button type="button" class="statsBtn" id="backToMenuBtn" onclick="hide('statsWindow'); show('mainMenuWindow'); show('buttonContainer')"> Back to Menu </button>
+               <button type="button" class="statsBtn" id="deleteSaveBtn" onclick="deleteSave();">x DELETE SAVE x</button>
+          </div>
 
-          <button id="acceptLoan" class="btn" onclick="setLoan(this.id)">Accept</button>
-          <button id="declineLoan" class="btn" onclick="setLoan(this.id)">Decline</button>
+          <div id="loanContainer" class="container">
+               <label id="loanLabel">
+                    Your balance went below 0.
+                    <br>
+                    A local agency offered a $1000 loan with 10.5% daily interest
+                    <br>
+                    You can accept the offer or lose everything!
+               </label>
+
+               <button id="acceptLoan" class="btn" onclick="setLoan(this.id)">Accept</button>
+               <button id="declineLoan" class="btn" onclick="setLoan(this.id)">Decline</button>
+               
+          </div>
+     </div>
+
+     <!--GAME VIEW WINDOW-->
+     <div id="gameWindow" class="container"> 
+          <div id="characterData">
+               <div id="avatar"></div>
+               <div id="info">
+                    <label id="fName" class="characterLabels">First Name: </label>
+                    <label id="mName" class="characterLabels">Middle Name: </label>
+                    <label id="lName" class="characterLabels">Last Name: </label>
+                    <label id="gender" class="characterLabels">Gender: </label>
+                    <label id="age" class="characterLabels">Age: </label>
+               </div>
+
+               <div id="docListContainer">
+                    <select id=docSelector>
+                         <!--
+                         <option value="passport" onclick="updateGUI()">Passport</option>
+                         <option value="visa" onclick="updateGUI()">Visa</option>
+                         <option value="permit" onclick="updateGUI()">Entry Permit</option>
+                         <option value="vaccine" onclick="updateGUI()">Vaccine Card</option>
+                         /-->
+                    </select>
+                    <button id="nextCharacter" class="btn" onclick="nextCharacter()">Next</button>
+               </div>
+
+               <label id="decisionLabel">Decision here</label>
+
+               <button id="denyButton" class="decBtn" onclick="evaluateChoice(this.id)">Deny Entry</button>
+               <button id="approveButton" class="decBtn" onclick="evaluateChoice(this.id)">Approve Entry</button>
+          </div>
+
+          <div id="documentWindow">
+               <div id="timeLine"></div>
+               <div id="passport" class="document">
+                    <div id="passportPicture"></div>
+                    <div id="passportData">
+                         <label id="passportfName" class="docLabels">First Name:</label>
+                         <label id="passportmName" class="docLabels">Middle Name:</label>
+                         <label id="passportlName" class="docLabels">First Name:</label>
+                         <label id="passportGender" class="docLabels">Gender:</label>
+                         <label id="passportAge" class="docLabels">Age:</label>
+                         <label id="passportpNumber" class="docLabels">P.N.:</label>
+                    </div>
+               </div>
+
+               <div id="visa" class="document">
+                    <div id="visaPicture"></div>
+                    <div id="visaData">
+                         <label id="visafName" class="docLabels">First Name:</label>
+                         <label id="visamName" class="docLabels">Middle Name:</label>
+                         <label id="visalName" class="docLabels">First Name:</label>
+                         <label id="visaGender" class="docLabels">Gender:</label>
+                         <label id="visaAge" class="docLabels">Age:</label>
+                         <label id="visapNumber" class="docLabels">P.N.:</label>
+                    </div>
+               </div>
+
+               <div id="permit" class="document">
+                    <div id="permitPicture"></div>
+                    <div id="permitData">
+                         <label id="permitfName" class="docLabels">First Name:</label>
+                         <label id="permitmName" class="docLabels">Middle Name:</label>
+                         <label id="permitlName" class="docLabels">First Name:</label>
+                         <label id="permitGender" class="docLabels">Gender:</label>
+                         <label id="permitAge" class="docLabels">Age:</label>
+                         <label id="permitpNumber" class="docLabels">P.N.:</label>
+                         <div id="permitSeal"></div>
+                    </div>
+               </div>
+
+               <div id="vaccine" class="document">
+                    <div id="vaccinePicture"></div>
+                    <div id="vaccineData">
+                         <label id="vaccinefName" class="docLabels">First Name:</label>
+                         <label id="vaccinemName" class="docLabels">Middle Name:</label>
+                         <label id="vaccinelName" class="docLabels">First Name:</label>
+                         <label id="vaccineGender" class="docLabels">Gender:</label>
+                         <label id="vaccineAge" class="docLabels">Age:</label>
+                         <label id="vaccinepNumber" class="docLabels">P.N.:</label>
+                    </div>
+               </div>
+          </div>
           
+          
+
      </div>
-</div>
-
-<!--GAME VIEW WINDOW-->
-<div id="gameWindow"> 
-     <div id="characterData">
-          <div id="avatar"></div>
-          <div id="info">
-               <label id="fName" class="characterLabels">First Name: </label>
-               <label id="mName" class="characterLabels">Middle Name: </label>
-               <label id="lName" class="characterLabels">Last Name: </label>
-               <label id="gender" class="characterLabels">Gender: </label>
-               <label id="age" class="characterLabels">Age: </label>
-          </div>
-
-          <div id="docListContainer">
-               <select id=docSelector>
-                    <!--
-                    <option value="passport" onclick="updateGUI()">Passport</option>
-                    <option value="visa" onclick="updateGUI()">Visa</option>
-                    <option value="permit" onclick="updateGUI()">Entry Permit</option>
-                    <option value="vaccine" onclick="updateGUI()">Vaccine Card</option>
-                    /-->
-               </select>
-               <button id="nextCharacter" class="btn" onclick="nextCharacter()">Next</button>
-          </div>
-
-          <label id="decisionLabel">Decision here</label>
-
-          <button id="denyButton" class="decBtn" onclick="evaluateChoice(this.id)">Deny Entry</button>
-          <button id="approveButton" class="decBtn" onclick="evaluateChoice(this.id)">Approve Entry</button>
+     <!--GAME OVER WINDOW-->
+     <div id="gameOverWindow" class="container">
+               <label id="gameOverLabel">THE END</label> 
+               <label id="gameOverString">You cant pay your bills anymore. How it feels to be broke?</label>
+               <button type="button" id="backFromOverBtn" class="btn" onclick="hide('gameOverWindow');show('mainMenuWindow');">Start Over</button>
      </div>
 
-     <div id="documentWindow">
-          <div id="timeLine"></div>
-          <div id="passport" class="document">
-               <div id="passportPicture"></div>
-               <div id="passportData">
-                    <label id="passportfName" class="docLabels">First Name:</label>
-                    <label id="passportmName" class="docLabels">Middle Name:</label>
-                    <label id="passportlName" class="docLabels">First Name:</label>
-                    <label id="passportGender" class="docLabels">Gender:</label>
-                    <label id="passportAge" class="docLabels">Age:</label>
-                    <label id="passportpNumber" class="docLabels">P.N.:</label>
-               </div>
-          </div>
-
-          <div id="visa" class="document">
-               <div id="visaPicture"></div>
-               <div id="visaData">
-                    <label id="visafName" class="docLabels">First Name:</label>
-                    <label id="visamName" class="docLabels">Middle Name:</label>
-                    <label id="visalName" class="docLabels">First Name:</label>
-                    <label id="visaGender" class="docLabels">Gender:</label>
-                    <label id="visaAge" class="docLabels">Age:</label>
-                    <label id="visapNumber" class="docLabels">P.N.:</label>
-               </div>
-          </div>
-
-          <div id="permit" class="document">
-               <div id="permitPicture"></div>
-               <div id="permitData">
-                    <label id="permitfName" class="docLabels">First Name:</label>
-                    <label id="permitmName" class="docLabels">Middle Name:</label>
-                    <label id="permitlName" class="docLabels">First Name:</label>
-                    <label id="permitGender" class="docLabels">Gender:</label>
-                    <label id="permitAge" class="docLabels">Age:</label>
-                    <label id="permitpNumber" class="docLabels">P.N.:</label>
-                    <div id="permitSeal"></div>
-               </div>
-          </div>
-
-          <div id="vaccine" class="document">
-               <div id="vaccinePicture"></div>
-               <div id="vaccineData">
-                    <label id="vaccinefName" class="docLabels">First Name:</label>
-                    <label id="vaccinemName" class="docLabels">Middle Name:</label>
-                    <label id="vaccinelName" class="docLabels">First Name:</label>
-                    <label id="vaccineGender" class="docLabels">Gender:</label>
-                    <label id="vaccineAge" class="docLabels">Age:</label>
-                    <label id="vaccinepNumber" class="docLabels">P.N.:</label>
-               </div>
+     <!--CREDITS-->
+     <div id="creditsWindow" class="container">
+          <label id="creditsTitle">CREDITS</label>
+          <div id="credits">
+               <label class="creditsLbl">Inspired By: PAPERS PLEASE by Luckas Pope</label>
+               <label class="creditsLbl">Characters created using CHARACTER CREATOR https://charactercreator.org/#</label>
+               <label class="creditsLbl">Design: Illia S.</label>
+               <label class="creditsLbl">Code: Illia S.</label>
+               <label class="creditsLbl">© Copyright Illia S. Lake Forest Academy 2020-2021. All rights reserved.</label>
+               <button type="button" class="btn" id="backFromCredits" onclick="show('mainMenuWindow');hide('creditsWindow')">Main Menu</button>
           </div>
      </div>
-
-</div>
-
-
      <script src="script.js"></script>
 </body>
 </html>
