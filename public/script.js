@@ -412,8 +412,11 @@ async function updateNames(){
 function updateSaveLabel(hoverButtonId){
   var day = currentProfile.progress["progressDay_" + hoverButtonId.split('').pop()];
   var balance = currentProfile.progress["progressBalance_" + hoverButtonId.split('').pop()];
-
-  getElement('saveInfoLabel').innerHTML = 'Day: ' + day + "<br/>" + "Balance: " + balance;
+  if(day == -1 && balance == -1){
+    getElement('saveInfoLabel').innerHTML = 'Empty. Choose save slot to create one.';
+  }else{
+    getElement('saveInfoLabel').innerHTML = 'Day: ' + day + "<br/>" + "Balance: " + balance;
+  }
 }
 
 function loadSave(buttonId){
