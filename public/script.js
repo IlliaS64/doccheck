@@ -413,9 +413,11 @@ function updateSaveLabel(hoverButtonId){
   var day = currentProfile.progress["progressDay_" + hoverButtonId.split('').pop()];
   var balance = currentProfile.progress["progressBalance_" + hoverButtonId.split('').pop()];
   if(day == -1 && balance == -1){
-    getElement('saveInfoLabel').innerHTML = 'Empty. Choose save slot to create one.';
+    getElement('saveInfoLabel').innerHTML = 'Empty slot.' + '<br/>' + 'No info here.';
+    getElement('saveInfoLabel').style.color = 'red';
   }else{
-    getElement('saveInfoLabel').innerHTML = 'Day: ' + day + "<br/>" + "Balance: " + balance;
+    getElement('saveInfoLabel').innerHTML = 'Day: ' + day + '<br/>' + "Balance: " + balance;
+    getElement('saveInfoLabel').style.color = 'black';
   }
 }
 
@@ -423,6 +425,7 @@ function loadSave(buttonId){
   const saveNumber = buttonId.split('').pop()
   if(currentProfile.progress['progressDay_' + saveNumber] < 0){
     addSave(saveNumber);
+    getElement('saveInfoLabel').style.color = 'black';
     getElement('saveInfoLabel').innerHTML = 'New save created! Click the button again to start the game.'
   }else{
     const day = currentProfile.progress["progressDay_" + saveNumber];
