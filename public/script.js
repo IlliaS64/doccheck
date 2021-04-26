@@ -413,7 +413,7 @@ function updateSaveLabel(hoverButtonId){
   var day = currentProfile.progress["progressDay_" + hoverButtonId.split('').pop()];
   var balance = currentProfile.progress["progressBalance_" + hoverButtonId.split('').pop()];
   if(day == -1 && balance == -1){
-    getElement('saveInfoLabel').innerHTML = 'Empty slot.' + '<br/>' + 'No info here.';
+    getElement('saveInfoLabel').innerHTML = 'Save#' + hoverButtonId.split('').pop() + '<br/>' + 'Empty.';
     getElement('saveInfoLabel').style.color = 'red';
   }else{
     getElement('saveInfoLabel').innerHTML = 'Day: ' + day + '<br/>' + "Balance: " + balance;
